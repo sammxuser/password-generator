@@ -1,5 +1,5 @@
 const passwordBox = document.getElementById('password');
-const copy = document.getElementById('copy');
+const copy = document.getElementById('copyImg');
 
 const generatePasswordBtn = document.getElementById('generatebtn');
 let length = 12;
@@ -22,9 +22,10 @@ function generatePassword() {
 }
 
 function copyPassword() {
+  // Using the execCommand(deprecated!)
   passwordBox.select();
-  navigator.clipboard.writeText(passwordBox.value);
-  alert('password copied!');
+  document.execCommand('copy');
+  //   alert('password copied!');
 }
 
 copy.addEventListener('click', copyPassword());
