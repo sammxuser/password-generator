@@ -1,5 +1,5 @@
 const passwordBox = document.getElementById('password');
-const copy = document.getElementById('copyImg');
+const copyElement = document.getElementById('copyImg');
 
 const generatePasswordBtn = document.getElementById('generatebtn');
 let length = 12;
@@ -23,12 +23,27 @@ function generatePassword() {
 
 function copyPassword() {
   // Using the execCommand(deprecated!)
-  passwordBox.select();
-  document.execCommand('copy');
+  //   passwordBox.select();
+  //   document.execCommand('copy');
   //   alert('password copied!');
+
+  //   Using Clipboard API for the copy functionality
+  const copiedPassword = async () => {
+    try {
+      await navigator.clipboard.writeText(passwordBox.value);
+      alert('Password copied!');
+      passwordBox.value = '';
+    } catch (error) {
+      console.error('Failed to copy: ', error);
+    }
+  };
+  copiedPassword();
 }
 
-copy.addEventListener('click', copyPassword());
+copyElement.addEventListener('click', () => {
+  copyPassword();
+});
+
 generatePasswordBtn.addEventListener('click', () => {
   passwordBox.value = generatePassword();
 });
